@@ -1,0 +1,5 @@
+export enum STATE {
+    APPROVED = "APPROVED",
+    PENDING = "PENDING",
+    REJECTED = "REJECTED"
+};
