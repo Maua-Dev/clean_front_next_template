@@ -1,4 +1,5 @@
-import { STATE } from "../enums/state_enum";
+import { STATE, toEnum } from "../enums/state_enum";
+import { EntityError } from "../helpers/errors/domain_error";
 
 export type UserProps = {
     id: string;  //uuid
@@ -7,25 +8,32 @@ export type UserProps = {
     state: STATE;
 }
 
+export type JsonProps = {
+    user_id: string;
+    name: string;
+    email: string;
+    state: string;
+}
+
 export class User {
     constructor (public props: UserProps) {
         if (!User.validateId(props.id)) {
-            throw Error('Entity error props.id')
+            throw new EntityError('props.id')
         }
         this.props.id = props.id
 
         if (!User.validateName(props.name)) {
-            throw Error('Entity error props.name')
+            throw new EntityError('props.name')
         }
         this.props.name = props.name
 
         if (!User.validateEmail(props.email)) {
-            throw Error('Entity error props.email')
+            throw new EntityError('props.email')
         }
         this.props.email = props.email
 
         if (!User.validateState(props.state)) {
-            throw Error('Entity error props.state')
+            throw new EntityError('props.state')
         }
         this.props.state = props.state
 
@@ -35,19 +43,56 @@ export class User {
         return this.props.id;
     }
 
+    set setId(id: string) {
+        if (!User.validateId(id)) {
+            throw new EntityError('props.id')
+        }
+        this.props.id = id
+    }
+
     get name() {
         return this.props.name;
+    }
+
+    set setName(name: string) {
+        if (!User.validateName(name)) {
+            throw new EntityError('props.name')
+        }
+        this.props.name = name
     }
 
     get email() {
         return this.props.email;
     }
 
+    set setEmail(email: string) {
+        if (!User.validateEmail(email)) {
+            throw new EntityError('props.email')
+        }
+        this.props.email = email
+    }
+
     get state() {
         return this.props.state;
     }
 
-    toJSON() {
+    set setState(state: STATE) {
+        if (!User.validateState(state)) {
+            throw new EntityError('props.state')
+        }
+        this.props.state = state
+    }
+    
+    static fromJSON(json: JsonProps) {
+        return new User({
+            id: json.user_id,
+            name: json.name,
+            email: json.email,
+            state: toEnum(json.state)
+        })
+    }
+
+    toJSON(): Object {
         return {
             id: this.id,
             name: this.name,
@@ -63,7 +108,7 @@ export class User {
             return false
         } else if (typeof(id) != "string") {
             return false
-        } else if (id.length < 36) {
+        } else if (id.length != 36) {
             return false
         }
         return true

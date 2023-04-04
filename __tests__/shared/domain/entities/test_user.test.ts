@@ -1,6 +1,6 @@
-
-import { User } from "@/@clean/shared/domain/entities/user";
+import { JsonProps, User } from "@/@clean/shared/domain/entities/user";
 import { STATE } from "@/@clean/shared/domain/enums/state_enum";
+import { EntityError } from "@/@clean/shared/domain/helpers/errors/domain_error";
 import { randomUUID } from "node:crypto";
 
 test('Test User entity', () => {
@@ -20,7 +20,15 @@ test('Test User entity with invalid length id', () => {
             email: 'rodrigo.dsiqueira1@gmailcom',
             state: STATE.PENDING
         })
-    }).toThrowError('Entity error props.id')
+    }).toThrowError(EntityError);
+    expect(() => {
+        new User({
+            id: '123',
+            name: 'Teste',
+            email: 'rodrigo.dsiqueira1@gmailcom',
+            state: STATE.PENDING
+        })
+    }).toThrowError('Field props.id is not valid');
 });
 test('Test User entity name', () => {
     const user = new User({
@@ -48,5 +56,38 @@ test('Test User entity error email', () => {
             email: 'rodrigo.dsiqueira1gmailcom',
             state: STATE.PENDING
         })
-    }).toThrowError('Entity error props.email')
+    }).toThrowError(EntityError);
+    expect(() => {
+        new User({
+            id: randomUUID(),
+            name: 'Teste',
+            email: 'rodrigo.dsiqueira1gmailcom',
+            state: STATE.PENDING
+        })
+    }).toThrowError('Field props.email is not valid');
+});
+test('Test to json', () => {
+    const user = new User({
+        id: randomUUID(),
+        name: 'Teste',
+        email: 'rodrigo.dsiqueira1@gmailcom',
+        state: STATE.PENDING
+    })
+
+    const userToJSON = user.toJSON();
+
+    expect(userToJSON).toBeInstanceOf(Object);
+});
+
+test('Test from json', () => {
+    const user = {
+        user_id: randomUUID(),
+        name: 'Teste',
+        email: 'rodrigo.dsiqueira1@gmailcom',
+        state: 'PENDING'
+    }
+
+    const userFromJSON = User.fromJSON(user);
+
+    expect(userFromJSON).toBeInstanceOf(User);
 });
