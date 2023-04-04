@@ -6,3 +6,5 @@ export interface IUserRepository {
     updateUser(userId: string, newName: string): User;  //returns updated user
     deleteUser(userId: string): User;
 }
+
+
