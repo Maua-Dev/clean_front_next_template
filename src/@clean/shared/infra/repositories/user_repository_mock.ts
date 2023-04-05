@@ -1,36 +1,42 @@
+import "reflect-metadata";
 import { IUserRepository } from "@/@clean/modules/user/domain/repositories/user_repository_interface";
 import { randomUUID } from "crypto";
 import { User } from "../../domain/entities/user";
 import { STATE } from "../../domain/enums/state_enum";
+import { decorate, injectable } from "inversify";
+import { uuid } from "uuidv4";
+
 
 export class UserRepositoryMock implements IUserRepository {
+
+
     private users: User[] = [
         new User({
-            id: randomUUID(),
+            id: uuid(),
             name: 'Toledo',
             email: 'rodrigo.devcommunity@gmail.com',
             state: STATE.PENDING
         }),
         new User({
-            id: randomUUID(),
+            id: uuid(),
             name: 'Zeeba',
             email: 'zeeba.devcommunity@gmail.com',
             state: STATE.PENDING
         }),
         new User({
-            id: randomUUID(),
+            id: uuid(),
             name: 'Enricao',
             email: 'enrico.devcommunity@gmail.com',
             state: STATE.PENDING
         }),
         new User({
-            id: randomUUID(),
+            id: uuid(),
             name: 'Ludjas',
             email: 'luigi.devcommunity@gmail.com',
             state: STATE.PENDING
         }),
         new User({
-            id: randomUUID(),
+            id: uuid(),
             name: 'Coordenas',
             email: 'coordenas.devcommunity@gmail.com',
             state: STATE.PENDING
@@ -63,3 +69,5 @@ export class UserRepositoryMock implements IUserRepository {
     }
 
 }
+
+decorate(injectable(), UserRepositoryMock);
