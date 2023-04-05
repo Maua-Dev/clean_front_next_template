@@ -1,19 +1,22 @@
+'use client';
 import { UserContext } from '@/contexts/user_provider'
 import React, { useContext } from 'react'
+import styles  from './users.module.css';
 
 export default function UsersPage() {
-    const { users, createUser, deleteUser, getUsers, updateUser } = useContext(UserContext)
+    const { users } = useContext(UserContext)
 
     return (
-        <>
+        <div className={ styles.page__container }>
             { users.map((user) => {
                 return (
-                    <div key={user.id}>
-                        <p>{user.name}</p>
-                        <button onClick={() => deleteUser(user.id)}>Deletar</button>
+                    <div key={user.id} className={ styles.container__users }>
+                        <p className={ styles.name__user } >{`User: ${user.name}`}</p>
+                        <p className={ styles.email__user } >{`User: ${user.email}`}</p>
+                        <p className={ styles.state__user } >{`User: ${user.state}`}</p>
                     </div>
                 )
             }) }
-        </>
+        </div>
     )
 }

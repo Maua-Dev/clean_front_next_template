@@ -1,3 +1,4 @@
+'use client';
 import { createContext, PropsWithChildren, useEffect, useState } from "react";
 import { User } from "@/@clean/shared/domain/entities/user";
 import { container, Registry } from "@/@clean/shared/infra/containers/container_user";
