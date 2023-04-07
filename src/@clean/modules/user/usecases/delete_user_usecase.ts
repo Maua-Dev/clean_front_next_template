@@ -4,7 +4,7 @@ import { IUserRepository } from "../domain/repositories/user_repository_interfac
 export class DeleteUserUsecase {
     constructor(private userRepo: IUserRepository) {}
 
-    execute(userId: number): Promise<User> {
+    execute(userId: string): User {
         return this.userRepo.deleteUser(userId);
     }
 }

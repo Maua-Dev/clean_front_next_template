@@ -4,9 +4,8 @@ import { IUserRepository } from "../domain/repositories/user_repository_interfac
 export class CreateUserUsecase {
     constructor(private userRepo: IUserRepository) {}
 
-    execute(user: User): Promise<User> {
+    execute(user: User): User {
         const userCreated = this.userRepo.createUser(user);
         return userCreated;
-        
     }
 }

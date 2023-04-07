@@ -5,16 +5,34 @@ import { randomUUID } from "node:crypto";
 
 test('Test User entity', () => {
     const user = new User({
-        id: 4,
+        id: randomUUID(),
         name: 'Teste',
         email: 'rodrigo.dsiqueira1@gmailcom',
         state: STATE.PENDING
     })
     expect(user).toBeInstanceOf(User);
 });
+test('Test User entity with invalid length id', () => {
+    expect(() => {
+        new User({
+            id: '123',
+            name: 'Teste',
+            email: 'rodrigo.dsiqueira1@gmailcom',
+            state: STATE.PENDING
+        })
+    }).toThrowError(EntityError);
+    expect(() => {
+        new User({
+            id: '123',
+            name: 'Teste',
+            email: 'rodrigo.dsiqueira1@gmailcom',
+            state: STATE.PENDING
+        })
+    }).toThrowError('Field props.id is not valid');
+});
 test('Test User entity name', () => {
     const user = new User({
-        id: 1,
+        id: randomUUID(),
         name: 'Teste',
         email: 'rodrigo.dsiqueira1@gmailcom',
         state: STATE.PENDING
@@ -23,7 +41,7 @@ test('Test User entity name', () => {
 });
 test('Test User entity email', () => {
     const user = new User({
-        id: 1,
+        id: randomUUID(),
         name: 'Teste',
         email: 'rodrigo.dsiqueira1@gmailcom',
         state: STATE.PENDING
@@ -33,7 +51,7 @@ test('Test User entity email', () => {
 test('Test User entity error email', () => {
     expect(() => {
         new User({
-            id: 1,
+            id: randomUUID(),
             name: 'Teste',
             email: 'rodrigo.dsiqueira1gmailcom',
             state: STATE.PENDING
@@ -41,7 +59,7 @@ test('Test User entity error email', () => {
     }).toThrowError(EntityError);
     expect(() => {
         new User({
-            id: 1,
+            id: randomUUID(),
             name: 'Teste',
             email: 'rodrigo.dsiqueira1gmailcom',
             state: STATE.PENDING
@@ -50,7 +68,7 @@ test('Test User entity error email', () => {
 });
 test('Test to json', () => {
     const user = new User({
-        id: 1,
+        id: randomUUID(),
         name: 'Teste',
         email: 'rodrigo.dsiqueira1@gmailcom',
         state: STATE.PENDING
@@ -63,7 +81,7 @@ test('Test to json', () => {
 
 test('Test from json', () => {
     const user = {
-        user_id: 1,
+        user_id: randomUUID(),
         name: 'Teste',
         email: 'rodrigo.dsiqueira1@gmailcom',
         state: 'PENDING'

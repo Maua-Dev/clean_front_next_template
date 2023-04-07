@@ -1,61 +1,58 @@
 import "reflect-metadata";
 import { IUserRepository } from "@/@clean/modules/user/domain/repositories/user_repository_interface";
+import { randomUUID } from "crypto";
 import { User } from "../../domain/entities/user";
-import { decorate, injectable } from "inversify";
 import { STATE } from "../../domain/enums/state_enum";
+import { decorate, injectable } from "inversify";
+import { uuid } from "uuidv4";
 
 
 export class UserRepositoryMock implements IUserRepository {
 
+
     private users: User[] = [
         new User({
-            id: 1,
+            id: uuid(),
             name: 'Toledo',
             email: 'rodrigo.devcommunity@gmail.com',
             state: STATE.PENDING
         }),
         new User({
-            id: 2,
+            id: uuid(),
             name: 'Zeeba',
             email: 'zeeba.devcommunity@gmail.com',
             state: STATE.PENDING
         }),
         new User({
-            id: 3,
+            id: uuid(),
             name: 'Enricao',
             email: 'enrico.devcommunity@gmail.com',
             state: STATE.PENDING
         }),
         new User({
-            id: 4,
+            id: uuid(),
             name: 'Ludjas',
             email: 'luigi.devcommunity@gmail.com',
             state: STATE.PENDING
         }),
         new User({
-            id: 5,
+            id: uuid(),
             name: 'Coordenas',
             email: 'coordenas.devcommunity@gmail.com',
             state: STATE.PENDING
         }),
     ];
 
-
-    
-
-
-    // MOCK IMPLEMENTATION
-    
-    async createUser(user: User): Promise<User> {
+    createUser(user: User): User {
         this.users.push(user);
         return user;
     }
 
-    async getUser(userId: number): Promise<User> {
-        return this.users[userId - 1];
+    getUsers(): User[] {
+        return this.users;
     }
 
-    async updateUser(userId: number, newName: string): Promise<User> {
+    updateUser(userId: string, newName: string): User {
         const user = this.users.find(user => user.id === userId);
         if (user) {
             user.setName = newName;
@@ -63,7 +60,7 @@ export class UserRepositoryMock implements IUserRepository {
         return user as User;
     }
 
-    async deleteUser(userId: number): Promise<User> {
+    deleteUser(userId: string): User {
         const user = this.users.find(user => user.id === userId);
         if (user) {
             this.users = this.users.filter(user => user.id !== userId);
@@ -73,5 +70,4 @@ export class UserRepositoryMock implements IUserRepository {
 
 }
 
-// inversão de dependência com inversify
 decorate(injectable(), UserRepositoryMock);

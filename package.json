@@ -7,15 +7,12 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:detect": "jest --detectOpenHandles"
+    "test": "jest"
   },
   "dependencies": {
     "@types/node": "^18.15.11",
     "@types/react": "18.0.32",
     "@types/react-dom": "18.0.11",
-    "axios": "^1.0.0",
     "eslint": "8.37.0",
     "eslint-config-next": "13.2.4",
     "inversify": "^6.0.1",
