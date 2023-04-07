@@ -2,14 +2,14 @@ import { STATE, toEnum } from "../enums/state_enum";
 import { EntityError } from "../helpers/errors/domain_error";
 
 export type UserProps = {
-    id: string;  //uuid
+    id: number;  //uuid
     name: string;
     email: string;
     state: STATE;
 }
 
 export type JsonProps = {
-    user_id: string;
+    user_id: number;
     name: string;
     email: string;
     state: string;
@@ -43,7 +43,7 @@ export class User {
         return this.props.id;
     }
 
-    set setId(id: string) {
+    set setId(id: number) {
         if (!User.validateId(id)) {
             throw new EntityError('props.id')
         }
@@ -92,7 +92,7 @@ export class User {
         })
     }
 
-    toJSON(): Object {
+    toJSON() {
         return {
             id: this.id,
             name: this.name,
@@ -103,12 +103,10 @@ export class User {
 
     // validações abaixo...
 
-    static validateId(id: string): boolean {
+    static validateId(id: number): boolean {
         if (id == null) {
             return false
-        } else if (typeof(id) != "string") {
-            return false
-        } else if (id.length != 36) {
+        } else if (typeof(id) != "number") {
             return false
         }
         return true

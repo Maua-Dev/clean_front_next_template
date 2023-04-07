@@ -7,7 +7,7 @@ import styles_delete_user from './delete_user.module.css';
 export default function DeleteUser() {
     const { users, deleteUser } = useContext(UserContext)
 
-    function handleDeleteUser(id: string) {
+    function handleDeleteUser(id: number) {
         deleteUser(id);
 
         console.log('User deleted: ', id);

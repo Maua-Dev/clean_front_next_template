@@ -31,7 +31,10 @@
     "**/tests/**/*.ts", 
     "jest.config.js", 
     "jest.setup.ts", 
-    "**/infra/**/*.ts"
+    "**/infra/**/*.ts",
+    "env.d.ts"
   ],
   "exclude": ["node_modules"]
 }
+
+

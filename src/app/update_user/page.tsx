@@ -6,11 +6,11 @@ import styles_update_user from './update_user.module.css';
 import { UserContext } from '@/contexts/user_provider';
 
 export default function UpdateUser() {
-    const [inputValue, setInputValue] = useState<string>('');
+    const [inputValue, setInputValue] = useState<number>(0);
 
     const { updateUser, users } = useContext(UserContext)
 
-    function handleUpdateUser(id: string, newName: string) {
+    function handleUpdateUser(id: number, newName: string) {
         updateUser(id, newName);
 
         console.log('User updated: ', id);
