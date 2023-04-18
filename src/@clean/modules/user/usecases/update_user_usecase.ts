@@ -4,7 +4,7 @@ import { IUserRepository } from "../domain/repositories/user_repository_interfac
 export class UpdateUserUsecase {
     constructor(private userRepo: IUserRepository) {}
 
-    execute(userId: string, newName: string): User {
+    execute(userId: number, newName: string): Promise<User> {
         return this.userRepo.updateUser(userId, newName);
     }
 }
