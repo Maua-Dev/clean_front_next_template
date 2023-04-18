@@ -17,3 +17,11 @@
     justify-content: center;
     height: 100vh;
 }
+
+.button__delete {
+    width: 150px;
+    height: 40px;
+    background-color: #FF0000;
+    border-radius: 15px;
+    border: none;
+}

@@ -13,6 +13,7 @@
     align-items: center;
     justify-content: center;
     height: 100%;
+    padding-top: 10px;
 }
 .name__user {
     font-family: Arial, Helvetica, sans-serif;
@@ -39,4 +40,27 @@
     align-items: center;
     justify-content: center;
     height: 100%;
+}
+
+.error__message {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+    color: red;
+    padding-top: 20px;
+    display: block;
+}
+
+.button__submit {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    margin-left: 20px;
+    padding: 10px 20px;
 }
