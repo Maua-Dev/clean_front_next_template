@@ -10,7 +10,7 @@ export default function UpdateUser() {
 
     const { updateUser, users } = useContext(UserContext)
 
-    function handleUpdateUser(id: string, newName: string) {
+    function handleUpdateUser(id: number, newName: string) {
         updateUser(id, newName);
 
         console.log('User updated: ', id);
