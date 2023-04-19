@@ -25,3 +25,8 @@
     border-radius: 15px;
     border: none;
 }
+
+.button__delete:hover {
+    background-color: #D50000;
+    cursor: pointer;
+}
