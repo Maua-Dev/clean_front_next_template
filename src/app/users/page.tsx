@@ -33,9 +33,10 @@ export default function UsersPage() {
 
     return (
         <div className={ styles.page__container }>
-            <form onSubmit={handleOnSubmit} className={ styles.form__container }>
+            <h1>Get User</h1>
+            <form onSubmit={handleOnSubmit} aria-label='input_get_user_by_id' className={ styles.form__container }>
                 <label htmlFor="name" className={ styles.id__label } >Search ID</label>
-                <input type="number" onClick={handleOnClickInput} name="id" id="id" className={ styles.id__input } />
+                <input type="number" aria-label='get_user_by_id' onClick={handleOnClickInput} name="id" id="id" className={ styles.id__input } />
                 <button type="submit" className={ styles.button__submit } >Search</button>
             </form>
             {/* API ERROR */}
