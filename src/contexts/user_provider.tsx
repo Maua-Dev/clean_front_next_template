@@ -59,18 +59,17 @@ export function UserProvider({ children }: PropsWithChildren) {
         }
     }
 
-    async function updateUser(userId: number, newName: string) {        
-        await updateUserUseCase.execute(userId, newName)
-        const userUpdated = await getUserUsecase.execute(userId)
+    async function updateUser(userId: number, newName: string) { 
+        const userUpdated = await updateUserUseCase.execute(userId, newName)
         users.filter(user => user.id !== userId)
         setUsers([...users, userUpdated])
+        
     }
 
     async function deleteUser(userId: number) {
         await deleteUserUseCase.execute(userId)
-        const userDeleted = await getUserUsecase.execute(userId)
-        users.filter(user => user.id !== userId)
-        setUsers([...users, userDeleted])
+        const usersFilteredAfterDelete = users.filter(user => user.id !== userId)
+        setUsers(usersFilteredAfterDelete)
 
     }
 
