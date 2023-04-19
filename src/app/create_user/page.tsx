@@ -4,6 +4,7 @@ import { STATE } from '@/@clean/shared/domain/enums/state_enum';
 import React, { useContext } from 'react';
 import styles from './create_user.module.css';
 import { UserContext } from '@/contexts/user_provider';
+import LinkComponent from '../components/Link';
 
 export default function CreateUserPage() {
     const { createUser, users } = useContext(UserContext)
@@ -36,10 +37,10 @@ export default function CreateUserPage() {
     }
 
     return (
-        <div>
+        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
             <h1>Create User</h1>
             <form onSubmit={handleSubmit} className={ styles.form }>
-                <label htmlFor="name" className={ styles.id__label } >ID</label>
+                <label htmlFor="id" className={ styles.id__label } >ID</label>
                 <input type="number" name="id" id="id" className={ styles.id__input } />
                 <label htmlFor="name" className={ styles.name__label } >Name</label>
                 <input type="text" name="name" id="name" className={ styles.name__input } />
@@ -53,6 +54,11 @@ export default function CreateUserPage() {
                 </select>
                 <button type="submit" className={ styles.button__submit } >Create</button>
             </form>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <LinkComponent href='delete_user' >Delete User</LinkComponent>
+                <LinkComponent href='update_user' >Update User</LinkComponent>
+                <LinkComponent href='users' >Get User by Id</LinkComponent>
+            </div>
             { users.map((user) => {
                 return (
                     <div key={user.id} className={ styles.container__users }>
