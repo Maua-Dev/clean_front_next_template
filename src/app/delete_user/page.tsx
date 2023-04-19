@@ -37,6 +37,13 @@ export default function DeleteUser() {
     function handleDeleteUser(id: number) {
         deleteUser(id);
         console.log('User deleted', id);
+
+        const span_message: HTMLSpanElement = document.querySelector('span') as HTMLSpanElement;
+        span_message.style.display = 'block';
+
+        setTimeout(() => {
+            span_message.style.display = 'none';
+        }, 3000) 
         
     }
 
@@ -47,7 +54,7 @@ export default function DeleteUser() {
             <div className={ styles.page__container }>
                 <form onSubmit={handleGetUser} className={ styles.form__container }>
                     <label htmlFor="name" className={ styles.id__label } >Search ID</label>
-                    <input type="number" onClick={handleOnClickInput} name="id" id="id" className={ styles.id__input } />
+                    <input type="number" aria-label='delete_user' onClick={handleOnClickInput} name="id" id="id" className={ styles.id__input } />
                     <button type="submit" className={ styles.button__submit } >Search</button>
                 </form>
                 { error && <p id='error_not_found' className={ styles.error__message } >{`${error}`}</p> }
@@ -64,7 +71,7 @@ export default function DeleteUser() {
                         </div>
                     )
                 }) }
-
+                <span style={{ display: 'none', color: 'red' }}>User deleted!!</span>
             </div>
         </div>
     )
