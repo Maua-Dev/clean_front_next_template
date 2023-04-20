@@ -3,6 +3,7 @@ import { IUserRepository } from "@/@clean/modules/user/domain/repositories/user_
 import { User } from "../../domain/entities/user";
 import { decorate, injectable } from 'inversify';
 import { AxiosError, AxiosInstance } from 'axios';
+import UserModel from '../models/user';
 
 export class UserHttpRepository implements IUserRepository {
     constructor(private http: AxiosInstance) {}
@@ -24,7 +25,7 @@ export class UserHttpRepository implements IUserRepository {
 
     async deleteUser(userId: number): Promise<User> {
         return await this.http.post(`/mss-template/delete-user?user_id=${userId}`).then(res => {
-            const userDeleted = User.fromJSON({
+            const userDeleted = UserModel.fromJSON({
                 user_id: res.data.user_id,
                 name: res.data.name,
                 email: res.data.email,
@@ -39,7 +40,7 @@ export class UserHttpRepository implements IUserRepository {
 
     async getUser(userId: number): Promise<User> {
         return await this.http.get(`/mss-template/get-user?user_id=${userId}`).then(res => {
-            const user = User.fromJSON({
+            const user = UserModel.fromJSON({
                 user_id: res.data.user_id,
                 name: res.data.name,
                 email: res.data.email,
@@ -54,7 +55,7 @@ export class UserHttpRepository implements IUserRepository {
 
     async updateUser(userId: number, newName: string): Promise<User> {
         return await this.http.post(`/mss-template/update-user?user_id=${userId}&new_name=${newName}`).then(res => {
-            const userUpdated = User.fromJSON({
+            const userUpdated = UserModel.fromJSON({
                 user_id: res.data.user_id,
                 name: res.data.name,
                 email: res.data.email,
@@ -69,3 +70,6 @@ export class UserHttpRepository implements IUserRepository {
 }
 
 decorate(injectable(), UserHttpRepository);
+
+// async await = try catch
+// sem async e await .then().catch()

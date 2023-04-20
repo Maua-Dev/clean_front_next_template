@@ -1,5 +1,5 @@
 import "reflect-metadata";
-import { Container, injectable } from "inversify";
+import { Container } from "inversify";
 import { UserRepositoryMock } from "../repositories/user_repository_mock";
 import { CreateUserUsecase } from "@/@clean/modules/user/usecases/create_user_usecase";
 import { GetUserUsecase } from "@/@clean/modules/user/usecases/get_user_usecase";

@@ -1,10 +1,8 @@
 import "reflect-metadata";
 import { IUserRepository } from "@/@clean/modules/user/domain/repositories/user_repository_interface";
-import { randomUUID } from "crypto";
 import { User } from "../../domain/entities/user";
 import { STATE } from "../../domain/enums/state_enum";
 import { decorate, injectable } from "inversify";
-import { uuid } from "uuidv4";
 import { NoItemsFoundError } from "../../domain/helpers/errors/domain_error";
 
 

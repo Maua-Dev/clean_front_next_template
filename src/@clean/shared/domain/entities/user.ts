@@ -8,13 +8,6 @@ export type UserProps = {
     state?: STATE;
 }
 
-export type JsonProps = {
-    user_id?: number;
-    name: string;
-    email: string;
-    state?: string;
-}
-
 export class User {
     constructor (public props: UserProps) {
         if (!User.validateId(props.id as number)) {
@@ -83,23 +76,7 @@ export class User {
         this.props.state = state
     }
     
-    static fromJSON(json: JsonProps) {
-        return new User({
-            id: json.user_id,
-            name: json.name,
-            email: json.email,
-            state: toEnum(json.state as string)
-        })
-    }
-
-    toJSON() {
-        return {
-            id: this.id,
-            name: this.name,
-            email: this.email,
-            state: this.state
-        }
-    }
+    
 
     // validações abaixo...
 
@@ -146,6 +123,8 @@ export class User {
         }
         return true
     }
+
+    // reformular validação STATE, melhorar para uma linha só
 
     
 

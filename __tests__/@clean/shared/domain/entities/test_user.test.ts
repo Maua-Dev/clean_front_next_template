@@ -1,7 +1,7 @@
-import { JsonProps, User } from "@/@clean/shared/domain/entities/user";
+import { User } from "@/@clean/shared/domain/entities/user";
 import { STATE } from "@/@clean/shared/domain/enums/state_enum";
 import { EntityError } from "@/@clean/shared/domain/helpers/errors/domain_error";
-import { randomUUID } from "node:crypto";
+import UserModel from "@/@clean/shared/infra/models/user";
 
 test('Test User entity', () => {
     const user = new User({
@@ -55,8 +55,8 @@ test('Test to json', () => {
         email: 'rodrigo.dsiqueira1@gmailcom',
         state: STATE.PENDING
     })
-
-    const userToJSON = user.toJSON();
+    const userModel = new UserModel(user)
+    const userToJSON = userModel.toJSON();
 
     expect(userToJSON).toBeInstanceOf(Object);
 });
@@ -69,7 +69,7 @@ test('Test from json', () => {
         state: 'PENDING'
     }
 
-    const userFromJSON = User.fromJSON(user);
+    const userModel = UserModel.fromJSON(user)
 
-    expect(userFromJSON).toBeInstanceOf(User);
+    expect(userModel).toBeInstanceOf(User);
 });
